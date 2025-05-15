@@ -5,7 +5,7 @@ import { AppService } from './app.service';
 
 @Module({
   imports: [
-    //Aqui van los modules
+    //Aqui van los modules Module1,Module2
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
