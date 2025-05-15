@@ -1,3 +1,4 @@
+import { EvaluacionEntity } from "src/evaluacion/evaluacion.entity";
 import { ProyectoEntity } from "src/proyecto/proyecto.entity";
 import { Column, Entity, IntegerType, Long, OneToMany, PrimaryColumn } from "typeorm";
 
@@ -25,6 +26,9 @@ export class ProfesorEntity {
         
         @OneToMany(() => ProyectoEntity, proyecto => proyecto.mentor )
         mentorias: ProyectoEntity[];
-    
+
+        @OneToMany(() => EvaluacionEntity, evaluacion =>evaluacion.evaluador )
+        evaluaciones:EvaluacionEntity[];
+        
         
 }

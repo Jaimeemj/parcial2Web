@@ -1,3 +1,4 @@
+import { ProfesorEntity } from "src/profesor/profesor.entity";
 import { ProyectoEntity } from "src/proyecto/proyecto.entity";
 import { Entity, Long, ManyToOne, PrimaryColumn } from "typeorm";
 
@@ -10,7 +11,8 @@ export class EvaluacionEntity {
     @ManyToOne(()=> ProyectoEntity,proyecto => proyecto.evaluaciones)
     proyecto:ProyectoEntity;
 
-
+    @ManyToOne(()=> ProfesorEntity,profesor => profesor.evaluaciones)
+    evaluador:ProyectoEntity;
 
     
 }
