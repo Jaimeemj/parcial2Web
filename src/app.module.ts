@@ -6,10 +6,17 @@ import { EvaluacionModule } from './evaluacion/evaluacion.module';
 import { EstudianteModule } from './estudiante/estudiante.module';
 import { ProyectoModule } from './proyecto/proyecto.module';
 import { ProfesorModule } from './profesor/profesor.module';
+import { ProfesorEntity } from './profesor/profesor.entity';
+import { ProyectoEntity } from './proyecto/proyecto.entity';
+import { EstudianteEntity } from './estudiante/estudiante.entity';
+import { EvaluacionEntity } from './evaluacion/evaluacion.entity';
 
 @Module({
   imports: [
-    //Aqui van los modules Module1,Module2
+    EstudianteModule,
+    ProyectoModule,
+    ProfesorModule,
+    EvaluacionModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
@@ -18,15 +25,15 @@ import { ProfesorModule } from './profesor/profesor.module';
       password: 'postgres',
       database: 'parcial',
       entities: [
+        ProfesorEntity,
+        ProyectoEntity,
+        EstudianteEntity,
+        EvaluacionEntity
 
       ],
       dropSchema: true, 
       synchronize: true,
-    }),
-    EvaluacionModule,
-    EstudianteModule,
-    ProyectoModule,
-    ProfesorModule,
+    })
   ],
   controllers: [AppController],
   providers: [AppService],
