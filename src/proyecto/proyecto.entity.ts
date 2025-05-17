@@ -1,13 +1,13 @@
 import { EstudianteEntity } from "src/estudiante/estudiante.entity";
 import { EvaluacionEntity } from "src/evaluacion/evaluacion.entity";
 import { ProfesorEntity } from "src/profesor/profesor.entity";
-import { Column, Entity, IntegerType, Long, ManyToOne, OneToMany, PrimaryColumn } from "typeorm";
+import { Column, Entity, IntegerType, Long, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class ProyectoEntity {
     
-            @PrimaryColumn('uuid')
-            id: Long;
+            @PrimaryGeneratedColumn('increment', { type: 'bigint' })
+            id: number;
           
             @Column()
             titulo:String;  
@@ -16,19 +16,19 @@ export class ProyectoEntity {
             area:String;
     
             @Column()
-            presupuesto:IntegerType;
+            presupuesto:number;
     
             @Column()
-            notaFinal:IntegerType;
+            notaFinal:number;
             
             @Column()
-            estado:IntegerType;
+            estado:number;
 
             @Column()
             fechaInicio:String;
 
             @Column()
-            fechaFIn:String;
+            fechaFin:String;
 
             
             @ManyToOne(()=> EstudianteEntity,estudiante => estudiante.proyectos)

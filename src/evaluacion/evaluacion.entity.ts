@@ -1,18 +1,18 @@
 import { ProfesorEntity } from "src/profesor/profesor.entity";
 import { ProyectoEntity } from "src/proyecto/proyecto.entity";
-import { Entity, Long, ManyToOne, PrimaryColumn } from "typeorm";
+import { Entity, Long, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class EvaluacionEntity {
     
-    @PrimaryColumn('uuid')
-    id: Long;
+  @PrimaryGeneratedColumn('increment', { type: 'bigint' })
+  id: Number;
     
     @ManyToOne(()=> ProyectoEntity,proyecto => proyecto.evaluaciones)
     proyecto:ProyectoEntity;
 
     @ManyToOne(()=> ProfesorEntity,profesor => profesor.evaluaciones)
-    evaluador:ProyectoEntity;
+    evaluador:ProfesorEntity;
 
     
 }

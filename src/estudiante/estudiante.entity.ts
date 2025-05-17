@@ -1,29 +1,27 @@
 import { ProyectoEntity } from "src/proyecto/proyecto.entity";
-import { Column, Entity, IntegerType, OneToMany, PrimaryColumn } from "typeorm";
-import { Long } from "typeorm/driver/mongodb/bson.typings";
+import { Column, Entity, Long, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class EstudianteEntity {
-    @PrimaryColumn('uuid')
-    id: Long;
-  
-    @Column()
-    cedula: IntegerType;
 
-    @Column()
-    semestre:IntegerType;  
-    
-    @Column()
-    programa:String;  
+  @PrimaryGeneratedColumn('increment', { type: 'bigint' })
+  id: number;
 
-    @Column()
-    promedio:IntegerType;  
+  @Column('int')
+  cedula: number;
 
-    
-    @OneToMany(() => ProyectoEntity, proyecto => proyecto.lider)
-    proyectos: ProyectoEntity[];
+  @Column({ type: 'varchar', length: 100 })
+  nombre: string;
 
+  @Column('int')
+  semestre: number;
 
+  @Column({ type: 'varchar', length: 100 })
+  programa: string;
 
+  @Column('int')
+  promedio: number;
 
+  @OneToMany(() => ProyectoEntity, proyecto => proyecto.lider)
+  proyectos: ProyectoEntity[];
 }

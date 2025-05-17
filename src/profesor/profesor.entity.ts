@@ -1,15 +1,15 @@
 import { EvaluacionEntity } from "src/evaluacion/evaluacion.entity";
 import { ProyectoEntity } from "src/proyecto/proyecto.entity";
-import { Column, Entity, IntegerType, Long, OneToMany, PrimaryColumn } from "typeorm";
+import { Column, Entity, IntegerType, Long, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class ProfesorEntity {
 
-        @PrimaryColumn('uuid')
-        id: Long;
+        @PrimaryGeneratedColumn('increment', { type: 'bigint' })
+        id: number;
       
         @Column()
-        cedula:IntegerType;  
+        cedula:number;  
         
         @Column()
         nombre:String;
@@ -18,7 +18,7 @@ export class ProfesorEntity {
         departamento:String;
 
         @Column()
-        extension:IntegerType;
+        extension:number;
         
         @Column()
         esParEvaluado:boolean;
