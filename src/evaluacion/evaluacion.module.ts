@@ -4,6 +4,7 @@ import { EvaluacionEntity } from './evaluacion.entity';
 import { ProyectoEntity } from 'src/proyecto/proyecto.entity';
 import { ProfesorEntity } from 'src/profesor/profesor.entity';
 import { EvaluacionService } from './evaluacion.service';
+import { EvaluacionController } from './evaluacion.controller';
 
 @Module({
   imports: [
@@ -15,5 +16,6 @@ import { EvaluacionService } from './evaluacion.service';
   ],
   providers: [EvaluacionService],
   exports: [EvaluacionService],
+  controllers: [EvaluacionController],
 })
 export class EvaluacionModule {}

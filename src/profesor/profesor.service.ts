@@ -36,13 +36,13 @@ export class ProfesorService {
         throw new Error('El profesor no tiene la extension esperada')    }
         }
 
-        async asignarEvaulador(id: number,evaluacionId: number){
+        async asignarEvaluador(id: number,evaluacionId: number){
         {
                 const profesor = await this.profesorRepository.findOne({
       where: { id: Number(id)   }
     });
                     const evaluacion = await this.evaluacionRepository.findOne({
-      where: { id: Number(id)   }
+      where: { id: Number(evaluacionId)   }
     });
         if (!profesor ) {
       throw new Error('Profesor no existe');
