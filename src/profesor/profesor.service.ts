@@ -3,12 +3,15 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ProfesorEntity } from './profesor.entity';
 import { Repository } from 'typeorm';
 import { ProfesorDTO } from './profesor.dto';
-import { EvaluacionEntity } from 'src/evaluacion/evaluacion.entity';
+import { EvaluacionEntity } from '../evaluacion/evaluacion.entity';
 import { EventListenerTypes } from 'typeorm/metadata/types/EventListenerTypes';
-import { ProyectoEntity } from 'src/proyecto/proyecto.entity';
+import { ProyectoEntity } from '../proyecto/proyecto.entity';
 
 @Injectable()
 export class ProfesorService {
+    findAllEstudiantes() {
+        throw new Error('Method not implemented.');
+    }
 
         constructor(
     

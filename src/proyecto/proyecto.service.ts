@@ -3,9 +3,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ProyectoEntity } from './proyecto.entity';
 import { Long, Repository } from 'typeorm';
 import { ProyectoDTO } from './proyecto.dto';
-import { EstudianteEntity } from 'src/estudiante/estudiante.entity';
-import { EvaluacionEntity } from 'src/evaluacion/evaluacion.entity';
-import { ProfesorEntity } from 'src/profesor/profesor.entity';
+import { EstudianteEntity } from '../estudiante/estudiante.entity';
+import { EvaluacionEntity } from '../evaluacion/evaluacion.entity';
+import { ProfesorEntity } from '../profesor/profesor.entity';
 
 @Injectable()
 export class ProyectoService {
@@ -106,7 +106,7 @@ export class ProyectoService {
     throw new Error('El presupuesto debe ser mayor a 0 y el título debe tener más de 15 caracteres');
   }
 
-  async avanzarProyecto(id: Long) {
+  async avanzarProyecto(id: number) {
     const proyecto = await this.proyectoRepository.findOne({ where: { id: Number(id) } });
     if (!proyecto) {
       throw new Error('No existe el proyecto');

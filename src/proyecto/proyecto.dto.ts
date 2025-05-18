@@ -25,10 +25,10 @@ export class ProyectoDTO {
   @IsNumber()
   estado: number;
 
-  @IsDateString()
+  @IsString()
   fechaInicio: string;
 
-  @IsDateString()
+  @IsString()
   fechaFin: string;
 
   @IsOptional()

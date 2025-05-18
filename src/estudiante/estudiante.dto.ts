@@ -1,4 +1,4 @@
-import { IsInt, IsString, IsNumber, Min, Max, IsNotEmpty, IsArray } from 'class-validator';
+import { IsInt, IsString, IsNumber, Min, Max, IsNotEmpty, IsArray, IsOptional } from 'class-validator';
 
 export class EstudianteDTO {
   @IsInt()
@@ -19,7 +19,7 @@ export class EstudianteDTO {
   @IsNotEmpty()
   promedio: number;
 
-
+  @IsOptional()
   @IsArray()
   @IsInt({ each: true })
   proyectosIds?: number[]; 

@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Long, Repository } from 'typeorm';
 import { EstudianteDTO } from './estudiante.dto';
 import { ExceptionsHandler } from '@nestjs/core/exceptions/exceptions-handler';
-import { ProyectoEntity } from 'src/proyecto/proyecto.entity';
+import { ProyectoEntity } from '../proyecto/proyecto.entity';
 @Injectable()
 export class EstudianteService {
 
@@ -66,7 +66,7 @@ export class EstudianteService {
 
 
 
-  async eliminarEstudiante(id: Long): Promise<void> {
+  async eliminarEstudiante(id: number): Promise<void> {
     const estudiante = await this.estudianteRepository.findOne({
       where: { id: Number(id) },
       relations: ['proyectos'],

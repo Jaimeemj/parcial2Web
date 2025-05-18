@@ -2,8 +2,8 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { EvaluacionEntity } from './evaluacion.entity';
-import { ProyectoEntity } from 'src/proyecto/proyecto.entity';
-import { ProfesorEntity } from 'src/profesor/profesor.entity';
+import { ProyectoEntity } from '../proyecto/proyecto.entity';
+import { ProfesorEntity } from '../profesor/profesor.entity';
 
 @Injectable()
 export class EvaluacionService {
