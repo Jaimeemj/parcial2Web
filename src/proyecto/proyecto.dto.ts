@@ -1,7 +1,15 @@
-import { IsString, IsNumber, IsOptional, IsDateString } from 'class-validator';
+import {
+  IsString,
+  IsNumber,
+  IsOptional,
+  IsDateString,
+  IsInt,
+  IsArray,
+  Max,
+  Min
+} from 'class-validator';
 
 export class ProyectoDTO {
-  
   @IsString()
   titulo: string;
 
@@ -22,4 +30,17 @@ export class ProyectoDTO {
 
   @IsDateString()
   fechaFin: string;
+
+  @IsOptional()
+  @IsInt()
+  liderId?: number;
+
+  @IsOptional()
+  @IsInt()
+  mentorId?: number;
+
+  @IsOptional()
+  @IsArray()
+  @IsInt({ each: true })
+  evaluacionesIds?: number[];
 }

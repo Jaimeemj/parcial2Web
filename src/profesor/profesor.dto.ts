@@ -1,24 +1,26 @@
-import { IsBoolean, IsInt, IsString } from "class-validator";
-import { Long } from "typeorm";
+import { IsBoolean, IsInt, IsString, IsOptional, IsArray } from 'class-validator';
 
 export class ProfesorDTO {
-        
+  @IsInt()
+  cedula: number;
 
-      
-        @IsInt()
-        cedula:number;  
-        
-        @IsString()
-        nombre:String;
+  @IsString()
+  nombre: string;
 
-        @IsString()
-        departamento:String;
+  @IsString()
+  departamento: string;
 
-        @IsInt()
-        extension:number;
-        
-        @IsBoolean()
-        esParEvaluado:boolean;
+  @IsInt()
+  extension: number;
 
+  @IsBoolean()
+  esParEvaluado: boolean;
 
+  @IsOptional()
+  @IsArray()
+  mentoriasIds: number[]; 
+
+  @IsOptional()
+  @IsArray()
+  evaluacionesIds: number[];
 }

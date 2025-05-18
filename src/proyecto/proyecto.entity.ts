@@ -18,7 +18,7 @@ export class ProyectoEntity {
             @Column()
             presupuesto:number;
     
-            @Column()
+            @Column('float')
             notaFinal:number;
             
             @Column()
@@ -33,6 +33,7 @@ export class ProyectoEntity {
             
             @ManyToOne(()=> EstudianteEntity,estudiante => estudiante.proyectos)
             lider: EstudianteEntity;
+            
             @OneToMany(() =>EvaluacionEntity,evaluacion =>evaluacion.proyecto)
             evaluaciones: EvaluacionEntity[];
         

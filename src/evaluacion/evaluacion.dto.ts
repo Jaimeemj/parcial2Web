@@ -1,4 +1,10 @@
+import { IsOptional, IsInt } from 'class-validator';
+
 export class EvaluacionDTO {
+  @IsInt()
   proyectoId: number;
-  evaluadorId: number;
+
+  @IsOptional()
+  @IsInt()
+  evaluadorId?: number;
 }
