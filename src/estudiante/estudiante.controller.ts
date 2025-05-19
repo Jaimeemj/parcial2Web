@@ -17,7 +17,7 @@ export class EstudianteController {
   }
 
   @Delete('eliminarEstudiantes/:id')
-  async eliminarEstudiante(@Param('id', ParseIntPipe) id: Long) {
+  async eliminarEstudiante(@Param('id', ParseIntPipe) id: number) {
     try {
       await this.estudianteService.eliminarEstudiante(id);
       return { mensaje: 'Estudiante eliminado correctamente' };

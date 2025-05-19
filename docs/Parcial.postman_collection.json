@@ -1,0 +1,522 @@
+{
+	"info": {
+		"_postman_id": "0821f469-4697-480f-ad46-9e12e8d6fbdc",
+		"name": "Parcial",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "32554050"
+	},
+	"item": [
+		{
+			"name": "Crear estudiantes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cedula\": 123456789,\r\n  \"nombre\":\"Jaime\",\r\n  \"semestre\": 6,\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"promedio\": 3.7\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/crearEstudiantes",
+				"description": "Este es el crear estudiantes. En el se puede introducir la info del un estudiante con sus relaciones.\n\nEn la lista proyetcosIds, los Ids de esos proyectos deben existir, es decir el proyetco debe existir. Se puede crear un estuidante con o sin proyectos relacionados."
+			},
+			"response": [
+				{
+					"name": "Estudiante sin proyecto",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cedula\": 123456789,\r\n  \"nombre\":\"Jaime\",\r\n  \"semestre\": 6,\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"promedio\": 3.7\r\n\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/crearEstudiantes"
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Estudiante con proyecto",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cedula\": 123456789,\r\n  \"nombre\":\"Jaime\",\r\n  \"semestre\": 6,\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"promedio\": 3.7,\r\n  \"proyectosIds\":[1]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/crearEstudiantes"
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Eliminar estudiante",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cedula\": 123456789,\r\n  \"nombre\":\"Jaime\",\r\n  \"semestre\": 6,\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"promedio\": 3.7\r\n\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/eliminarEstudiantes/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"eliminarEstudiantes",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "El id del estudiante que se va a eliminar debe existir y el estudiante no debe tener proyectos asociados"
+			},
+			"response": [
+				{
+					"name": "Eliminar estudiante sin proyecto asociado",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cedula\": 123456789,\r\n  \"nombre\":\"Jaime\",\r\n  \"semestre\": 6,\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"promedio\": 3.7\r\n\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/eliminarEstudiantes/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"eliminarEstudiantes",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Eliminar estudiante con proyecto asociado",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cedula\": 123456789,\r\n  \"nombre\":\"Jaime\",\r\n  \"semestre\": 6,\r\n  \"programa\": \"Ingeniería de Sistemas\",\r\n  \"promedio\": 3.7\r\n\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/eliminarEstudiantes/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"eliminarEstudiantes",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Crear Proyecto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"titulo\": \"Desarrollo de aplicaciones web usando nest.js como backend\",\r\n  \"area\": \"Educación Digital\",\r\n  \"presupuesto\": 122,\r\n  \"notaFinal\": 3,\r\n  \"estado\": 2,\r\n  \"fechaInicio\": \"2025-06-01\",\r\n  \"fechaFin\": \"2025-12-20\"\r\n\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/crearProyecto",
+				"description": "Proyecto puede crearse sin relaciones. titulo debe tener un largo almenos de 15, estado debe estar entre 0 y 4 y el presupuesto debe ser mayor a 0."
+			},
+			"response": [
+				{
+					"name": "Crear Proyecto sin relaciones",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"titulo\": \"12345678901112131415\",\r\n  \"area\": \"Educación Digital\",\r\n  \"presupuesto\": 122,\r\n  \"notaFinal\": 4,\r\n  \"estado\": 1,\r\n  \"fechaInicio\": \"2025-06-01\",\r\n  \"fechaFin\": \"2025-12-20\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/crearProyecto"
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Crear Proyecto con estudiante asociado",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"titulo\": \"12345678901112131415\",\r\n  \"area\": \"Educación Digital\",\r\n  \"presupuesto\": 122,\r\n  \"notaFinal\": 6,\r\n  \"estado\": 2,\r\n  \"fechaInicio\": \"2025-06-01\",\r\n  \"fechaFin\": \"2025-12-20\",\r\n \"liderId\": 3,\r\n  \"mentorId\":1\r\n\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/crearProyecto"
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Crear Evaluacion",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/crearEvaluacion/:idProyecto/:idProfesor",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"crearEvaluacion",
+						":idProyecto",
+						":idProfesor"
+					],
+					"variable": [
+						{
+							"key": "idProyecto",
+							"value": "1"
+						},
+						{
+							"key": "idProfesor",
+							"value": "0"
+						}
+					]
+				},
+				"description": "En crear evaluacion se debe relacionar con un proyecto, mientras que profesor puede ser opcional. Si no se desea relacionar con un profesor en el valor :idProfesor debe ser 0. Mientars que idProyecto si debe existir. Por ultimo el proyecto debe tener una nota entre 0 y 5 para poder asignarse a evaluacion."
+			},
+			"response": [
+				{
+					"name": "Crear evaluación solo con proyecto asociado",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/crearEvaluacion/:idProyecto/:idProfesor",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"crearEvaluacion",
+								":idProyecto",
+								":idProfesor"
+							],
+							"variable": [
+								{
+									"key": "idProyecto",
+									"value": "3"
+								},
+								{
+									"key": "idProfesor",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Crear Profesor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cedula\": 100100100,\r\n  \"nombre\": \"Dr. Sabio\",\r\n  \"departamento\": \"Ingeniería de Software\",\r\n  \"extension\": 5,\r\n  \"esParEvaluado\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/crearProfesor",
+				"description": "El profesor puede crearse sin relaciones, si se desea agregar relaciones serian de la siguiente manera:  \n\\- mentoriasIds: Contiene una lista de proyectoId (debe existir el proyecto)\n\nevaluacionesIds: Contiene una lista de evaluacionId (debe existir la evaluacion)"
+			},
+			"response": [
+				{
+					"name": "Crear Profesor sin asociaciones",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cedula\": 100100100,\r\n  \"nombre\": \"Dr. Sabio\",\r\n  \"departamento\": \"Ingeniería de Software\",\r\n  \"extension\": 5,\r\n  \"esParEvaluado\": false\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/crearProfesor"
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Crear Profesor con proyecto asociado",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cedula\": 100100100,\r\n  \"nombre\": \"Dr. Sabio\",\r\n  \"departamento\": \"Ingeniería de Software\",\r\n  \"extension\": 5,\r\n  \"esParEvaluado\": false,\r\n  \"mentoriasIds\":[2]\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/crearProfesor"
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Asignar evaluador",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/asignarEvaluador/:idProfesor/:idEvaluacion",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"asignarEvaluador",
+						":idProfesor",
+						":idEvaluacion"
+					],
+					"variable": [
+						{
+							"key": "idProfesor",
+							"value": "2"
+						},
+						{
+							"key": "idEvaluacion",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Debe contener los 2 ids, tanto de profesor como de evaluacion."
+			},
+			"response": [
+				{
+					"name": "Asignar evaluador",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/asignarEvaluador/:idProfesor/:idEvaluacion",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"asignarEvaluador",
+								":idProfesor",
+								":idEvaluacion"
+							],
+							"variable": [
+								{
+									"key": "idProfesor",
+									"value": "3"
+								},
+								{
+									"key": "idEvaluacion",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Avanzar Proyecto",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/avanzarProyecto/1",
+				"description": "El proyecto debe existir y su estado debe estar entre 0 y 4."
+			},
+			"response": [
+				{
+					"name": "Avanzar Proyecto",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/avanzarProyecto/1"
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "findAllEstudiantes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/findAllEstudiantes",
+				"description": "Obtiene todos los estudiantes que estan relacionados a almenos un proyecto. No devuelve estudiantes repetidos."
+			},
+			"response": [
+				{
+					"name": "findAllEstudiantes",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/findAllEstudiantes"
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		}
+	]
+}

@@ -65,7 +65,6 @@ export class ProyectoService {
       if (proyectoInfo.estado>4 ||proyectoInfo.estado<0 ) {
         throw new Error('El estado debe estar entre 0 y 4');
       }
-      // Crear el proyecto
       const proyecto = this.proyectoRepository.create({
         titulo: proyectoInfo.titulo,
         area: proyectoInfo.area,
@@ -80,13 +79,11 @@ export class ProyectoService {
       });
 
       const saved = await this.proyectoRepository.save(proyecto);
-       // Actualizar el líder en la entidad Estudiante
       if (lider) {
         lider.proyectos = [...(lider.proyectos || []), saved];
         await this.estudianteRepository.save(lider);
       }
 
-      // Actualizar el mentor en la entidad Profesor
       if (mentor) {
         mentor.mentorias = [...(mentor.mentorias || []), saved];
         await this.profesorRepository.save(mentor);

@@ -30,7 +30,7 @@ export class EstudianteService {
             proyectos.push(proyecto);
           }
         }
-      
+        
       if (estudianteDto.promedio>3.2 && estudianteDto.semestre>=4) {
         const estudiante = this.estudianteRepository.create({
           cedula:estudianteDto.cedula,
@@ -42,16 +42,14 @@ export class EstudianteService {
         })
         const guardarEstudiante = await this.estudianteRepository.save(estudiante);
         for (const proyecto of proyectos) {
-            proyecto.lider = estudiante;
-            await this.proyectoRepository.save(proyecto);
+          proyecto.lider = estudiante;
+          await this.proyectoRepository.save(proyecto);
         }
 
         const estudianteActualizado = await this.estudianteRepository.findOne({
           where: { id: guardarEstudiante.id },
           relations: ['proyectos', 'proyectos.evaluaciones', 'proyectos.mentor', 'proyectos.lider']
         });
-
-
 
       if(!estudianteActualizado) {
         throw new Error('No se pudo encontrar el estudiante después de guardarlo');
@@ -61,7 +59,7 @@ export class EstudianteService {
       else{
         throw new Error('EL promedio no esta dentro de lo esperado'); 
       }
-      } 
+  } 
   
 
 
@@ -78,7 +76,7 @@ export class EstudianteService {
     if (estudiante.proyectos.length > 0) {
       throw new Error('El estudiante aun tiene proyectos activos');
     }
-  
+    
     await this.estudianteRepository.remove(estudiante);
   }
 

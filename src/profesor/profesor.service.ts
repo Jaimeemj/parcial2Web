@@ -13,142 +13,143 @@ export class ProfesorService {
         throw new Error('Method not implemented.');
     }
 
-        constructor(
-    
-        @InjectRepository(ProfesorEntity)
-        private readonly profesorRepository: Repository<ProfesorEntity>,
-        @InjectRepository(EvaluacionEntity)
-        private readonly evaluacionRepository: Repository<EvaluacionEntity>,
-        @InjectRepository(ProyectoEntity)
-        private readonly proyectoRepository: Repository<ProyectoEntity>
-        ){}
+    constructor(
 
-        async crearProfesor(profesorInfo: ProfesorDTO): Promise<ProfesorEntity> {
-            const proyectos: ProyectoEntity[] = [];
+    @InjectRepository(ProfesorEntity)
+    private readonly profesorRepository: Repository<ProfesorEntity>,
+    @InjectRepository(EvaluacionEntity)
+    private readonly evaluacionRepository: Repository<EvaluacionEntity>,
+    @InjectRepository(ProyectoEntity)
+    private readonly proyectoRepository: Repository<ProyectoEntity>
+    ){}
 
-            if (profesorInfo.mentoriasIds && profesorInfo.mentoriasIds.length > 0) {
-                for (let index = 0; index < profesorInfo.mentoriasIds.length; index++) {
-                const id = profesorInfo.mentoriasIds[index];
-                const proy = await this.proyectoRepository.findOne({
-                    where: { id: Number(id) },
-                    relations: ['lider', 'evaluaciones'],
-                });
+    async crearProfesor(profesorInfo: ProfesorDTO): Promise<ProfesorEntity> {
+      const proyectos: ProyectoEntity[] = [];
 
-                if (!proy) {
-                    throw new Error(`Proyecto con ID ${id} no existe`);
-                }
+      if (profesorInfo.mentoriasIds && profesorInfo.mentoriasIds.length > 0) {
+        for (let index = 0; index < profesorInfo.mentoriasIds.length; index++) {
+          const id = profesorInfo.mentoriasIds[index];
+          const proy = await this.proyectoRepository.findOne({
+          where: { id: Number(id) },
+          relations: ['lider', 'evaluaciones'],
+          });
 
-                proyectos.push(proy);
-                }
-            }
+          if (!proy) {
+            throw new Error(`Proyecto con ID ${id} no existe`);
+          }
 
-            const evaluaciones: EvaluacionEntity[] = [];
+          proyectos.push(proy);
+        }
+      }
 
-            if (profesorInfo.evaluacionesIds && profesorInfo.evaluacionesIds.length > 0) {
-                for (let index = 0; index < profesorInfo.evaluacionesIds.length; index++) {
-                const id = profesorInfo.evaluacionesIds[index];
-                const evaluacion = await this.evaluacionRepository.findOne({
-                    where: { id: Number(id) },
-                    relations: ['proyecto', 'evaluador'], 
-                });
+      const evaluaciones: EvaluacionEntity[] = [];
 
-                if (!evaluacion) {
-                    throw new Error(`Evaluación con ID ${id} no existe`);
-                }
+      if (profesorInfo.evaluacionesIds && profesorInfo.evaluacionesIds.length > 0) {
+        for (let index = 0; index < profesorInfo.evaluacionesIds.length; index++) {
+          const id = profesorInfo.evaluacionesIds[index];
+          const evaluacion = await this.evaluacionRepository.findOne({
+            where: { id: Number(id) },
+            relations: ['proyecto', 'evaluador'], 
+          });
 
-                evaluaciones.push(evaluacion);
-                }
-            }
+          if (!evaluacion) {
+            throw new Error(`Evaluación con ID ${id} no existe`);
+          }
 
-            if (profesorInfo.extension === 5) {
-                const profesor = this.profesorRepository.create({
-                cedula: profesorInfo.cedula,
-                nombre: profesorInfo.nombre,
-                departamento: profesorInfo.departamento,
-                extension: profesorInfo.extension,
-                esParEvaluado: profesorInfo.esParEvaluado,
-                mentorias: proyectos,
-                evaluaciones: evaluaciones,
-                });
+          evaluaciones.push(evaluacion);
+          }
+      }
 
-                if (profesorInfo.mentoriasIds && profesorInfo.mentoriasIds.length > 0) {
-                for (let index = 0; index < profesorInfo.mentoriasIds.length; index++) {
-                const id = profesorInfo.mentoriasIds[index];
-                const proy = await this.proyectoRepository.findOne({
-                    where: { id: Number(id) },
-                    relations: ['lider', 'evaluaciones'],
-                });
-
-                if (!proy) {
-                    throw new Error(`Proyecto con ID ${id} no existe`);
-                }
-
-                proyectos.push(proy);
-                }
-            }
-        const guardarProfesor = await this.profesorRepository.save(profesor);
-
-                for (const evaluacion of evaluaciones) {
-                    evaluacion.evaluador = guardarProfesor;
-                    await this.evaluacionRepository.save(evaluacion);
-
-                }
-                for (const proyecto of proyectos) {
-                    proyecto.mentor = guardarProfesor;
-                    await this.proyectoRepository.save(proyecto);
-                }
-        const profesorActualizado = await this.profesorRepository.findOne({
-          where: { id: guardarProfesor.id },
-          relations: ['mentorias', 'mentorias.evaluaciones', 'mentorias.mentor', 'mentorias.lider']
+      if (profesorInfo.extension === 5) {
+        const profesor = this.profesorRepository.create({
+        cedula: profesorInfo.cedula,
+        nombre: profesorInfo.nombre,
+        departamento: profesorInfo.departamento,
+        extension: profesorInfo.extension,
+        esParEvaluado: profesorInfo.esParEvaluado,
+        mentorias: proyectos,
+        evaluaciones: evaluaciones,
         });
 
-        if (!profesorActualizado) {
-          throw new Error('No se pudo encontrar el profesor actualizado');
+        if (profesorInfo.mentoriasIds && profesorInfo.mentoriasIds.length > 0) {
+          for (let index = 0; index < profesorInfo.mentoriasIds.length; index++) {
+            const id = profesorInfo.mentoriasIds[index];
+            const proy = await this.proyectoRepository.findOne({
+                where: { id: Number(id) },
+                relations: ['lider', 'evaluaciones'],
+            });
+
+            if (!proy) {
+              throw new Error(`Proyecto con ID ${id} no existe`);
+            }
+
+            proyectos.push(proy);
+          }
         }
+      const guardarProfesor = await this.profesorRepository.save(profesor);
+      
+      for (const evaluacion of evaluaciones) {
+        evaluacion.evaluador = guardarProfesor;
+        await this.evaluacionRepository.save(evaluacion);
 
-        return profesorActualizado;
-            } else {
-                throw new Error('El profesor no tiene la extensión esperada');
-            }
-            }
-
-
-       
-            async asignarEvaluador(id: number, evaluacionId: number) {
-  const profesor = await this.profesorRepository.findOne({
-    where: { id },
-    relations: ['evaluaciones'],
-  });
-
-  if (!profesor) {
-    throw new Error('Profesor no existe');
-  }
-
-  const evaluacion = await this.evaluacionRepository.findOne({
-    where: { id: evaluacionId },
-    relations: ['evaluador'],
-  });
-
-  if (!evaluacion) {
-    throw new Error('La evaluación no existe');
-  }
-  if (profesor.evaluaciones.length >= 3) {
-    throw new Error('El evaluador tiene 3 o más evaluaciones');
-  }
+      }
+      for (const proyecto of proyectos) {
+        proyecto.mentor = guardarProfesor;
+        await this.proyectoRepository.save(proyecto);
+      }
+      const profesorActualizado = await this.profesorRepository.findOne({
+          where: { id: guardarProfesor.id },
+          relations: ['mentorias', 'mentorias.evaluaciones', 'mentorias.mentor', 'mentorias.lider']
+      });
+      
+      if (!profesorActualizado) {
+        throw new Error('No se pudo encontrar el profesor actualizado');
+      }
+      
+      return profesorActualizado;
+      } 
+      else {
+        throw new Error('El profesor no tiene la extensión esperada');
+      }
+    }
 
 
-  profesor.evaluaciones.push(evaluacion);
-  evaluacion.evaluador = profesor;
+    
+    async asignarEvaluador(id: number, evaluacionId: number) {
+      const profesor = await this.profesorRepository.findOne({
+          where: { id },
+          relations: ['evaluaciones'],
+      });
+
+      if (!profesor) {
+        throw new Error('Profesor no existe');
+      }
+
+      const evaluacion = await this.evaluacionRepository.findOne({
+          where: { id: evaluacionId },
+          relations: ['evaluador'],
+      });
+
+      if (!evaluacion) {
+        throw new Error('La evaluación no existe');
+      }
+      if (profesor.evaluaciones.length >= 3) {
+        throw new Error('El evaluador tiene 3 o más evaluaciones');
+      }
 
 
-  await this.profesorRepository.save(profesor);
-  await this.evaluacionRepository.save(evaluacion);
+      profesor.evaluaciones.push(evaluacion);
+      evaluacion.evaluador = profesor;
 
-  return {
-    message: 'Evaluador asignado correctamente',
-    evaluacionId: evaluacion.id,
-    profesorId: profesor.id
-  };
-}
+
+      await this.profesorRepository.save(profesor);
+      await this.evaluacionRepository.save(evaluacion);
+
+      return {
+      message: 'Evaluador asignado correctamente',
+      evaluacionId: evaluacion.id,
+      profesorId: profesor.id
+      };
+    }
 
 }
